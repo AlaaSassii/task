@@ -59,9 +59,9 @@ function App() {
         }
         else{
           if(data.discription && data.taskName){
-            axios.post("https://100098.pythonanywhere.com/team_task_management/create_task_team/",{assignee:"64262f5545b7b70fd0990a66",title:data.taskName ,description:data.discription,team:data.team_name , completed:"false" })
+            axios.post("https://100098.pythonanywhere.com/team_task_management/create_team_task/",{assignee:data.Assignee,title:data.taskName ,description:data.discription,team:data.team_name , completed:false})
             .then(r => console.log(r.data))
-            .catch(e => {console.log(e); console.log({assignee:"64262f5545b7b70fd0990a66",title:data.taskName ,description:data.discription,team:data.team_name , completed:false })})
+            .catch(e => {console.log(e); console.log({assignee:data.Assignee,title:data.taskName ,description:data.discription,team:data.team_name , completed:false })})
           }else{
             alert("message not ")
           }
@@ -74,6 +74,7 @@ function App() {
       {step}
       <button onClick={buttonFunction}>Next</button>
       </form>
+      <hr />
       <Teams/>
     </div>
   )

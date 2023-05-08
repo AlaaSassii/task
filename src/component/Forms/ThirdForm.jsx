@@ -3,7 +3,9 @@ import { useValues } from '../../context/Values';
 
 const ThirdForm = () => {
   const {data , setdata} = useValues() ;
-  const {selected_members} = data ;
+  console.log({data})
+  const {selected_members , TeamsSelected} = data ;
+  console.log(TeamsSelected)
             const  formatNames = (names) => {
                         if (names.length === 0) {
                           return "";
@@ -25,6 +27,16 @@ const ThirdForm = () => {
             <input type="text" placeholder='Task name'  onChange={e => setdata({...data ,taskName:e.target.value})}/>
             <br />
             <input type="text" placeholder='Task discription'  onChange={e => setdata({...data ,discription:e.target.value})}/>
+            <p>Assignee</p>
+            <select name="" id="" onChange={e => setdata({...data , Assignee:e.target.value})}>
+              {data.memebers.map((v,i)=> <option value={v} key={i}>{v}</option>)}
+            </select>
+            {/* <select name="" id="" onChange={e => setdata({...data , team_name:e.target.value})}> 
+              {data.TeamsSelected.map((v,i)=> <option value={v.team_name} key={i}>{v.team_name}</option> )}
+            </select>  */}
+            {/* 
+           
+           */}
     </div>
   )
 }
