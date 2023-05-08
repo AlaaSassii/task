@@ -27,6 +27,13 @@ function App() {
     })
   }
   useEffect(()=>{
+        axios("https://100098.pythonanywhere.com/team_task_management/create_get_team/")
+        .then(resp =>{console.log(resp.data); 
+          setdata({...data ,teamId:resp.data.find(v => v.team_name === data.team_name).id})
+        })
+        .catch(err => console.log(err))
+  },[])
+  useEffect(()=>{
     axios(`https://100098.pythonanywhere.com/candidate_management/get_all_onboarded_candidate/63a2b3fb2be81449d3a30d3f/`)
     .then(resp => console.log(resp.data))
     .catch(err => console.log(err))
@@ -59,7 +66,7 @@ function App() {
         }
         else{
           if(data.discription && data.taskName){
-            axios.post("https://100098.pythonanywhere.com/team_task_management/create_team_task/",{assignee:data.Assignee,title:data.taskName ,description:data.discription,team:data.team_name , completed:false})
+            axios.post("https://100098.pythonanywhere.com/team_task_management/create_team_task/",{assignee:data.Assignee,title:data.taskName ,description:data.discription,team:data.teamId , completed:false})
             .then(r => console.log(r.data))
             .catch(e => {console.log(e); console.log({assignee:data.Assignee,title:data.taskName ,description:data.discription,team:data.team_name , completed:false })})
           }else{

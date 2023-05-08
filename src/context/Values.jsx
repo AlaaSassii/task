@@ -17,7 +17,8 @@ export const CandidateJobsContextProvider = ({ children }) => {
       discription:"" , 
       Assignee:"" , 
       completed:false , 
-      TeamsSelected:[] 
+      TeamsSelected:[] ,
+      teamId:""
     })
 
     return (

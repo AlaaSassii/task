@@ -1,8 +1,16 @@
-import React , {useState} from 'react'
+import React , {useState ,useEffect} from 'react'
 import { useValues } from '../../context/Values';
+import axios from 'axios';
 
 const ThirdForm = () => {
   const {data , setdata} = useValues() ;
+  useEffect(()=>{
+    axios("https://100098.pythonanywhere.com/team_task_management/create_get_team/")
+    .then(resp =>{console.log(resp.data); 
+      setdata({...data ,teamId:resp.data.find(v => v.team_name === data.team_name).id})
+    })
+    .catch(err => console.log(err))
+},[])
   console.log({data})
   const {selected_members , TeamsSelected} = data ;
   console.log(TeamsSelected)
@@ -19,6 +27,7 @@ const ThirdForm = () => {
                           return `${otherNames.join(", ")} and ${lastName}`;
                         }
                       }
+    if(data.teamId === "") return <h1>Loading...</h1>
   return (
     <div>
             <h6>Assigned Member(s)</h6>
