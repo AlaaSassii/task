@@ -7,6 +7,7 @@ const Teams = () => {
   const {data , setdata} = useValues() ;
 
             useEffect(()=>{
+              console.log("aaaaaaaaaaaaaaaaaaaaa")
                         axios("https://100098.pythonanywhere.com/team_task_management/create_get_team/")
                         .then(resp =>{ setteams(resp.data);console.log(resp.data);setdata({...data , TeamsSelected:resp.data})})
                         .catch(err => console.log(err))
