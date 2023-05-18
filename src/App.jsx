@@ -13,8 +13,10 @@ const intialValue = {
 }
 
 function App() {
+  const [impLoading , setImpLoading] = useState(false) ; 
   const {data , setdata} = useValues() ;
   console.log(data)
+  console.log({membersEditTeam:data.membersEditTeam})
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, next ,back} =
   useMultistepForm([
     <FirstForm/>,
@@ -34,8 +36,9 @@ function App() {
         .catch(err => console.log(err))
   },[])
   useEffect(()=>{
+    setImpLoading(true)
     axios(`https://100098.pythonanywhere.com/candidate_management/get_all_onboarded_candidate/63a2b3fb2be81449d3a30d3f/`)
-    .then(resp => console.log(resp.data))
+    .then(resp =>{ console.log(resp.data);setImpLoading(false)})
     .catch(err => console.log(err))
   },[])
   const buttonFunction = ()=>{
@@ -74,6 +77,7 @@ function App() {
           }
         }
   }
+  if(impLoading)return<h1>Loading...</h1>
   return (
     <div >
       <form onSubmit={e => e.preventDefault()}>
